@@ -11,7 +11,11 @@ export default class Asker {
      * @param {Array | JSON | Object} questions 
      * @param {Object} options 
      */
-    constructor(target,questions, options){
+    constructor(target,questions,onComplete, options){
+
+        this.questions = questions;
+        this.onComplete = onComplete;
+
 
         /** TODO: Get the target element */
 
