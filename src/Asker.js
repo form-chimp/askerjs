@@ -23,7 +23,89 @@ export default class Asker {
 
         this.container = new Container(this.target);
 
+    /**
+     * Render the question.
+     * @param {Object} question The question object
+     */
+    ask(question){
+
+        this.container.clear();
+
+       this.container.add(
+            new AnimateIn(
+                new Heading(question.text).render()
+            ).render()
+        );
+
+        switch (question.type) {
+
+            case 'singleChoice':
+
+                let singleChoiceInput = new ChoiceInput(true, question.required, question.choices);
+    
+                this.container.add(
+                    new AnimateIn(
+                        singleChoiceInput.render()
+                    ).render()
+                )
+                
+                this.container.add(
+                    new AnimateIn(
+                        this.initFormControl(question, singleChoiceInput)
+                    ).render()
+                )
+
+
+                break;
+
+            case 'multipleChoice':
+
+                let multipleChoiceInput = new ChoiceInput(false, question.required, question.choices);
+
+                this.container.add(
+                    new AnimateIn(
+                        multipleChoiceInput.render()
+                    ).render()
+                )
+
+                this.container.add(
+                    new AnimateIn(
+                        this.initFormControl(question, multipleChoiceInput)
+                    ).render()
+                )
+                break;
+
+                
+            case 'text':
+
+                let textInput = new Input('text',question.required, (value) => {
+                    if(value){
+                        question.value = value;
+                        this.nextQuestion(question);
+                    }
+                });
+                
+
+                this.container.add(
+                    new AnimateIn(
+                        textInput.render()
+                    ).render()
+                )
+
+                this.container.add(
+                    new AnimateIn(
+                        this.initFormControl(question, textInput)
+                    ).render()
+                )
+
+                break;
         
+            default:
+
+                break;
+        }
+    }
+
 
     }
 
