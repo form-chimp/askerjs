@@ -47,6 +47,17 @@ export default class Asker {
      */
     ask(question){
 
+        if (!question || question === null){
+            this.container.clear();
+            
+            this.container.add(
+                new AnimateIn(
+                    new Heading(`Error`).render()
+                ).render()
+            );
+
+            throw new Error('The question is not a valid object');
+        }
         this.container.clear();
 
        this.container.add(
