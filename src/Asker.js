@@ -160,4 +160,26 @@ export default class Asker {
     }
 
 
+    initFormControl(question, input){
+
+        let btnContainer = document.createElement('div');
+        btnContainer.classList.add('flex','justify-between','items-center');
+
+        let nextBtn = new NextBtn(()=>{
+            question.value = input.getValue();
+
+            if (question.value){
+                this.nextQuestion(question);
+            }
+        });
+        
+        let prevBtn = new BackBtn((()=>{
+            this.prevQuestion();
+        }))
+        
+        btnContainer.appendChild(prevBtn.render());
+        btnContainer.appendChild(nextBtn.render());
+
+        return btnContainer;
+    }
 }
