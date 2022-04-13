@@ -27,4 +27,13 @@ export default class Container{
             this.element.innerHTML += element;
         }
     }
+
+    /**
+     * Removes all elements from the container.
+     * Should be used with caution.
+     */
+    clear(){
+        this.element.innerHTML = '';
+        
+    }
 }
