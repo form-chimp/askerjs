@@ -106,7 +106,35 @@ export default class Asker {
         }
     }
 
+    /**
+     * `ask()`'s the next question.
+     * @param {Object} currentQuestion The current question object
+     */
+    nextQuestion(currentQuestion){
 
+        let nextQuestion = currentQuestion.next;
+
+        this.formTimeline.push( currentQuestion);
+
+        if (nextQuestion){
+            this.ask(this.questions[nextQuestion]);
+        } else {
+            this.container.clear(); 
+
+            this.onComplete(this.questions);
+
+
+            this.container.add(
+                new AnimateIn(
+                    new Heading('Thank you!').render()
+                ).render()
+            );
+        }
+
+        //console.log(currentQuestion);
+        //this.ask(currentQuestion);
+
+    }
     }
 
 
