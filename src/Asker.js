@@ -1,6 +1,11 @@
 
 import AnimateIn from "./components/animate-in";
 import Container from "./components/container";
+import Heading from "./components/heading";
+import Input from "./components/form/input";
+import ChoiceInput from "./components/form/choiceInput";
+import NextBtn from "./components/Next-btn";
+import BackBtn from "./components/Back-btn";
 
 
 export default class Asker {
