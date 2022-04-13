@@ -23,6 +23,13 @@ export default class Asker {
 
         this.container = new Container(this.target);
 
+
+
+        this.formTimeline = [];
+
+    }
+
+
     /**
      * Render the question.
      * @param {Object} question The question object
@@ -135,6 +142,17 @@ export default class Asker {
         //this.ask(currentQuestion);
 
     }
+
+    /**
+     * Go back to the previous question.
+     */
+    prevQuestion(){
+            
+        if (this.formTimeline.length > 0){
+            let prevQuestion = this.formTimeline.pop();
+            this.ask(prevQuestion);
+        }
+    
     }
 
 
