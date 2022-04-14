@@ -153,11 +153,11 @@ export default class Asker {
             this.onComplete(this.questions);
 
 
-            this.container.add(
-                new AnimateIn(
-                    new Heading('Thank you!').render()
-                ).render()
-            );
+            // this.newContent(
+            //     new AnimateIn(
+            //         new Heading('Thank you!').render()
+            //     ).render()
+            // );
         }
 
         //console.log(currentQuestion);
