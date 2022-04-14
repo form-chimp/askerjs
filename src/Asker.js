@@ -200,4 +200,19 @@ export default class Asker {
 
         return btnContainer;
     }
+
+    /**
+     * Change the content of the form.
+     * @param {HTMLElement | String} content
+     */
+    newContent(content){
+
+        this.container.clear();
+
+        this.container.add(
+            new AnimateIn(
+                content
+            ).render()
+        );
+    }
 }
