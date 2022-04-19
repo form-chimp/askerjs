@@ -6,6 +6,7 @@ import Input from "./components/form/input";
 import ChoiceInput from "./components/form/choiceInput";
 import NextBtn from "./components/Next-btn";
 import BackBtn from "./components/Back-btn";
+import Textarea from "./components/form/Textarea";
 
 
 export default class Asker {
@@ -128,6 +129,29 @@ export default class Asker {
                 )
 
                 break;
+
+                case 'paragraph':
+                    
+                    let paragraphInput = new Textarea(question.required, (value) => {
+                        if(value){
+                            question.value = value;
+                            this.nextQuestion(question);
+                        }
+                    });
+
+                    this.container.add(
+                        new AnimateIn(
+                            paragraphInput.render()
+                        ).render()
+                    )
+
+                    this.container.add(
+                        new AnimateIn(
+                            this.initFormControl(question, paragraphInput)
+                        ).render()
+                    )
+
+                    break;
         
             default:
 
