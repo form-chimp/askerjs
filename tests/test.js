@@ -23,6 +23,11 @@ let questions = {
             '👎 Nah bro' 
         ],
         required: false,
+    },
+    'q-3':{
+        text: 'Tell us something about yourself',
+        type: 'paragraph',
+        required: true,
     }
 }
 
