@@ -9,17 +9,26 @@ export default class ErrorHandler{
             this.target = target;
             this.massage = massage || 'Error';
             this.element = new AnimateIn(`
-            <p class="text-red-500"> ${this.massage} </p>
-        `).render()
+            <div class="asker_error-massage">
+                ${massage}
+            </div>
+        `)
+
 
             this.target.appendChild(
-                this.element
+                this.element.render()
             )
             console.error('ErrorHandler: ', this.massage);
 
             setTimeout(() => {
-                this.element.remove()
+                this.element.out()
+                
             }, 3000);
+
+            setTimeout(() => {
+                this.element.container.remove()
+            }, 3300);
+
         }
         
 }
