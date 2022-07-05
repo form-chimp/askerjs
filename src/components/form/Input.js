@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import ErrorHandler from '../Error-renderer';
 
 
 /**
@@ -15,19 +16,15 @@ export default class Input{
      * @param {Number} max The maximum length of the input.
      * @param {*} placeholder 
      */
-    constructor(type = 'text', required = false, onComplete, placeholder = 'Enter Here'){
+    constructor(type = 'text', required = false, onComplete, min=0, max=10000, placeholder = 'Enter Here'){
 
 
         this.element = document.createElement('input');
         this.element.type = type;
         this.element.placeholder = placeholder;
         this.required = required;
-<<<<<<< Updated upstream
-
-=======
         this.minimum = min;
         this.maximum = max
->>>>>>> Stashed changes
 
         this.container = document.createElement('div');
         this.container.classList.add('w-full');
@@ -36,6 +33,7 @@ export default class Input{
         this.element.classList.add(...tailwindClasses);
 
         this.element.addEventListener('keydown', (e) => {
+
             if (e.key === 'Enter') {
                 //console.log(this.valid());
                 //console.log(this.getValue());
@@ -77,15 +75,6 @@ export default class Input{
     valid(){
         if(this.required){
             
-<<<<<<< Updated upstream
-            if(_.trim(this.element.value).length === 0){
-                this.element.classList.add('focus:border-red-500','border-2','border-red-500');
-                return false;
-            }else{ 
-
-                this.element.classList.remove('focus:border-red-500','border-2','border-red-500');
-                return true;
-=======
             if(_.trim(this.element.value).length >= this.minimum){
 
                 if(_.trim(this.element.value).length <= this.maximum){
@@ -104,7 +93,6 @@ export default class Input{
                 this.element.classList.add('focus:border-red-500','border-2','border-red-500');
                 new ErrorHandler(this.container,`Response must be at least ${this.minimum} characters long.`);
                 return false;
->>>>>>> Stashed changes
                     
             }
         }else{
