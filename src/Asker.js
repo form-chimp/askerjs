@@ -219,7 +219,15 @@ export default class Asker {
             this.prevQuestion();
         }))
         
-        btnContainer.appendChild(prevBtn.render());
+        if(this.formTimeline.length){
+            btnContainer.appendChild(prevBtn.render());
+        }
+        
+        if(!question.next){
+            nextBtn.changeText("Finish")
+
+        }
+
         btnContainer.appendChild(nextBtn.render());
 
         return btnContainer;
