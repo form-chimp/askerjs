@@ -114,7 +114,7 @@ export default class Asker {
                         question.value = value;
                         this.nextQuestion(question);
                     }
-                });
+                }, question.min, question.max);
                 
 
                 this.container.add(
