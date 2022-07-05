@@ -28,4 +28,12 @@ export default class AnimateIn{
     render(){
         return this.container;
     }
+
+    out(){
+        gsap.to(this.container, {
+            opacity: 0, 
+            x: 0 , 
+            duration: .3
+        });
+    }
 }
