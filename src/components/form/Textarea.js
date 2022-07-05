@@ -1,4 +1,5 @@
 import _ from "lodash";
+import ErrorHandler from "../Error-renderer";
 
 
 /**
@@ -14,19 +15,25 @@ export default class Textarea {
      * @param {Number} min Minimum length of the field.
      * @param {String} placeholder Placeholder text.
      */
-    constructor(required = false, onComplete, min = 0, placeholder = 'Enter Here') {
+    constructor(required = false, onComplete, min = 0, max = 1000000, placeholder = 'Enter Here') {
 
         this.element = document.createElement('textarea');
         this.element.placeholder = placeholder;
         this.required = required;
         this.minimum = min;
+        this.maximum = max
+        this.container = document.createElement('div');
+        this.container.classList.add('w-full');
 
         let tailwindClasses = ['w-full', 'p-4', 'bg-gray-100', 'rounded', 'font-medium', 'text-gray-600', 'outline-none', 'focus:border-2', 'focus:border-blue-500', 'focus:shadow-lg', 'transition-all', 'duration-75'];
         this.element.classList.add(...tailwindClasses);
 
+        
+
         this.element.addEventListener('keydown', () => {
-            this.valid();
+            //this.valid();
         });
+        this.container.appendChild(this.element)
     }
 
     /**
@@ -34,12 +41,12 @@ export default class Textarea {
      * @returns {HTMLElement}
      */
     render() {
-        return this.element;
+        return this.container;
     }
 
     /**
      * Get the value of the textarea.
-     * @returns {String}
+     * @returns {String | undefined}
      */
     getValue() {
             
@@ -60,16 +67,27 @@ export default class Textarea {
      */
     valid() {
         if (this.required) {
-            if (_.trim(this.element.value).length === this.minimum) {
-                this.element.classList.add('border-red-500','border-2');
+            if(_.trim(this.element.value).length >= this.minimum){
+
+                if(_.trim(this.element.value).length <= this.maximum){
+
+                    this.element.classList.remove('focus:border-red-500','border-2','border-red-500');
+                    return true;
+                }else{
+                    this.element.classList.add('focus:border-red-500','border-2','border-red-500');
+                    new ErrorHandler(this.container,'Maximum length is ' + this.maximum);
+                    return false;
+                }
+
+                
+            }else{ 
+
+                this.element.classList.add('focus:border-red-500','border-2','border-red-500');
+                new ErrorHandler(this.container,`Response must be at least ${this.minimum} characters long.`);
                 return false;
+                    
             }
-            else {
-                this.element.classList.remove('border-red-500','border-2');
-                return true;
-            }
-        }
-        else {
+        }else {
             return true;
         }
     }

@@ -7,6 +7,7 @@ import ChoiceInput from "./components/form/choiceInput";
 import NextBtn from "./components/Next-btn";
 import BackBtn from "./components/Back-btn";
 import Textarea from "./components/form/Textarea";
+import ErrorHandler from "./components/Error-renderer";
 
 
 export default class Asker {
@@ -137,7 +138,7 @@ export default class Asker {
                             question.value = value;
                             this.nextQuestion(question);
                         }
-                    });
+                    }, question.min, question.max);
 
                     this.container.add(
                         new AnimateIn(
