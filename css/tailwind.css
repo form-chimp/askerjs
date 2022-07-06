@@ -48,4 +48,8 @@
     @apply bg-gray-500
 }
 
+.asker_error-massage{
+    @apply p-3 bg-red-500 text-white rounded mt-3
+}
+
 
