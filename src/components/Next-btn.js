@@ -16,9 +16,7 @@ export default class NextBtn{
 
         this.element = document.createElement('button');
 
-        let tailwindClasses = ['p-4','font-medium','text-gray-800'];
-
-        this.element.classList.add(...tailwindClasses);
+        this.element.classList.add('asker_next-btn');
 
 
         if (this.options.text) {

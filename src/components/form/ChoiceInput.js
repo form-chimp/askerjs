@@ -6,9 +6,10 @@ class Choice{
      * 
      * @param {Object | String} choice 
      */
-    constructor(choice){
+    constructor(choice, single=true){
 
         this.choice = choice;
+        this.single = single; // whether the user can select one choice. this variable will be used for styling. 
 
         if(typeof choice === 'string'){
             this.choice = {
@@ -25,20 +26,23 @@ class Choice{
 
 
         this.element = document.createElement('div');
-        let tailwindClasses = ['p-4', 'mb-4', 'bg-gray-100', 'font-medium', 'rounded', 'flex', 'flex-wrap','items-center','gap-4', 'cursor-pointer',]
-        this.element.classList.add(...tailwindClasses);
+        
+        this.element.classList.add('asker_choice');
 
         this.selectedIcon = document.createElement('div');
-        let iconTailwindClasses = ['w-6', 'h-6', 'rounded-full', 'border-gray-500', 'border-2', 'transition-all', 'duration-100'];
-        this.selectedIcon.classList.add(...iconTailwindClasses);
+        
+        this.selectedIcon.classList.add('asker_select-icon');
 
         this.labelElement = document.createElement('div');
         this.labelElement.innerHTML = this.label;
-        this.labelElement.classList.add('font-medium', 'text-gray-600');
 
         this.element.appendChild(this.selectedIcon);
         this.element.appendChild(this.labelElement);
 
+        if(!this.single){
+            this.selectedIcon.classList.remove('box')
+            //this.selectedIcon.classList.add('rounded')
+        }
     }
 
     render(){     
@@ -52,7 +56,13 @@ class Choice{
     select(){
 
         this.choice.selected = true;
-        this.selectedIcon.classList.add('bg-gray-500');
+        this.selectedIcon.classList.add('selected');
+
+        
+        this.selectedIcon.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none">
+        <path d="M2.00003 6.6066L8.01043 12.617L18.617 2.01041" stroke="#F9FAFB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`
+
         return this.choice;
     }
 
@@ -62,7 +72,8 @@ class Choice{
      */
     unselect(){
         this.choice.selected = false;
-        this.selectedIcon.classList.remove('bg-gray-500');
+        this.selectedIcon.classList.remove('selected');
+        this.selectedIcon.innerHTML=``
         return this.choice;
     }
 }
@@ -87,15 +98,14 @@ export default class ChoiceInput{
 
         this.container = document.createElement('div');
 
-        let tailwindClasses = ['w-full', 'flex','flex-col','gap-3'];
-        this.container.classList.add(...tailwindClasses);
+        this.container.classList.add('asker_choices-container');
 
         this.chosen = [];
         let allChoiceElements =[]
 
         this.choices.forEach(choice => {
             
-            let choiceElement = new Choice(choice);
+            let choiceElement = new Choice(choice, this.singleChoice);
             this.container.appendChild(choiceElement.render());
             allChoiceElements.push(choiceElement);
             

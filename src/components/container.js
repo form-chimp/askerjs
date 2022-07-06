@@ -14,9 +14,7 @@ export default class Container{
 
         this.element = document.createElement('div');
 
-        let tailwindClasses = ['w-full', 'p-4','asker_container','flex','flex-col','gap-4'];
-
-        this.element.classList.add(...tailwindClasses);
+        this.element.classList.add('asker_container');
 
         this.target.appendChild(this.element);
     }

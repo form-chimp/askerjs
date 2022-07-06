@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* Default theme */
+.asker_container{
+    @apply p-4 flex flex-col gap-4 w-full
+}
+
+.asker_heading{
+    @apply md:text-4xl text-3xl  text-gray-800 capitalize font-medium;
+}
+
+.asker_input{
+    @apply w-full p-4 bg-gray-100 rounded font-medium text-gray-600 outline-none focus:border-blue-500 focus:shadow-lg focus:border-2 transition-all duration-75
+}
+
+
+.asker_next-btn{
+    @apply font-medium p-4 text-gray-800;
+}
+
+.asker_back-btn{
+    @apply p-4 text-gray-700;
+}
+
+
+.asker_textarea{
+    @apply w-full p-4 bg-gray-100 rounded font-medium text-gray-600 outline-none focus:border-2 focus:border-blue-500 focus:shadow-lg transition-all duration-75
+}
+
+
+.asker_choices-container{
+    @apply flex flex-col gap-2
+}
+
+.asker_choice{
+    @apply p-4 mb-4 bg-gray-100 font-medium text-gray-600 rounded flex flex-wrap items-center gap-4 cursor-pointer 
+}
+
+.asker_select-icon{
+    @apply w-6 h-6 rounded border-gray-500 flex justify-center items-center border-2 transition-all duration-100
+}
+
+.asker_select-icon.selected{
+    @apply bg-gray-500
+}
+
+
