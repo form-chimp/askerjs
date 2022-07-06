@@ -29,8 +29,8 @@ export default class Input{
         this.container = document.createElement('div');
         this.container.classList.add('w-full');
 
-        let tailwindClasses = ['w-full', 'p-4', 'bg-gray-100', 'rounded', 'font-medium', 'text-gray-600', 'outline-none', 'focus:border-2', 'focus:border-blue-500', 'focus:shadow-lg', 'transition-all', 'duration-75'];
-        this.element.classList.add(...tailwindClasses);
+    
+        this.element.classList.add('asker_input');
 
         this.element.addEventListener('keydown', (e) => {
 

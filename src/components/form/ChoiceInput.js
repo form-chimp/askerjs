@@ -6,7 +6,6 @@ class Choice{
      * 
      * @param {Object | String} choice 
      */
-    constructor(choice){
     constructor(choice, single=true){
 
         this.choice = choice;
@@ -27,16 +26,15 @@ class Choice{
 
 
         this.element = document.createElement('div');
-        let tailwindClasses = ['p-4', 'mb-4', 'bg-gray-100', 'font-medium', 'rounded', 'flex', 'flex-wrap','items-center','gap-4', 'cursor-pointer',]
-        this.element.classList.add(...tailwindClasses);
+        
+        this.element.classList.add('asker_choice');
 
         this.selectedIcon = document.createElement('div');
-        let iconTailwindClasses = ['w-6', 'h-6', 'rounded-full', 'border-gray-500', 'border-2', 'transition-all', 'duration-100'];
-        this.selectedIcon.classList.add(...iconTailwindClasses);
+        
+        this.selectedIcon.classList.add('asker_select-icon');
 
         this.labelElement = document.createElement('div');
         this.labelElement.innerHTML = this.label;
-        this.labelElement.classList.add('font-medium', 'text-gray-600');
 
         this.element.appendChild(this.selectedIcon);
         this.element.appendChild(this.labelElement);
@@ -74,7 +72,8 @@ class Choice{
      */
     unselect(){
         this.choice.selected = false;
-        this.selectedIcon.classList.remove('bg-gray-500');
+        this.selectedIcon.classList.remove('selected');
+        this.selectedIcon.innerHTML=``
         return this.choice;
     }
 }
@@ -99,8 +98,7 @@ export default class ChoiceInput{
 
         this.container = document.createElement('div');
 
-        let tailwindClasses = ['w-full', 'flex','flex-col','gap-3'];
-        this.container.classList.add(...tailwindClasses);
+        this.container.classList.add('asker_choices-container');
 
         this.chosen = [];
         let allChoiceElements =[]

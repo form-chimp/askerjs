@@ -14,9 +14,7 @@ export default class Heading{
 
         this.element = document.createElement('h1');
 
-        let tailwindClasses = ['text-4xl','text-gray-800','capitalize', 'font-medium'];
-
-        this.element.classList.add(...tailwindClasses);
+        this.element.classList.add('asker_heading');
 
         this.element.innerText = this.text;
     }
