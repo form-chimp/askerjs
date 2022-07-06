@@ -7,8 +7,10 @@ class Choice{
      * @param {Object | String} choice 
      */
     constructor(choice){
+    constructor(choice, single=true){
 
         this.choice = choice;
+        this.single = single; // whether the user can select one choice. this variable will be used for styling. 
 
         if(typeof choice === 'string'){
             this.choice = {
@@ -39,6 +41,10 @@ class Choice{
         this.element.appendChild(this.selectedIcon);
         this.element.appendChild(this.labelElement);
 
+        if(!this.single){
+            this.selectedIcon.classList.remove('box')
+            //this.selectedIcon.classList.add('rounded')
+        }
     }
 
     render(){     
@@ -52,7 +58,13 @@ class Choice{
     select(){
 
         this.choice.selected = true;
-        this.selectedIcon.classList.add('bg-gray-500');
+        this.selectedIcon.classList.add('selected');
+
+        
+        this.selectedIcon.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none">
+        <path d="M2.00003 6.6066L8.01043 12.617L18.617 2.01041" stroke="#F9FAFB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`
+
         return this.choice;
     }
 
@@ -95,7 +107,7 @@ export default class ChoiceInput{
 
         this.choices.forEach(choice => {
             
-            let choiceElement = new Choice(choice);
+            let choiceElement = new Choice(choice, this.singleChoice);
             this.container.appendChild(choiceElement.render());
             allChoiceElements.push(choiceElement);
             
