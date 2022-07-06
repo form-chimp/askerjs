@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: npm build
-      - run: npm css
+      - run: npm run build
+      - run: npm run css
 
 
   publish-npm:
