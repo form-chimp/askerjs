@@ -225,7 +225,7 @@ export default class Asker {
     initFormControl(question, input){
 
         let btnContainer = document.createElement('div');
-        btnContainer.classList.add('flex','justify-between','items-center');
+        btnContainer.classList.add('asker_buttons-container');
 
         let nextBtn = new NextBtn(()=>{
             question.value = input.getValue();
