@@ -8,6 +8,7 @@ import NextBtn from "./components/Next-btn";
 import BackBtn from "./components/Back-btn";
 import Textarea from "./components/form/Textarea";
 import ErrorHandler from "./components/Error-renderer";
+import FileUpload from "./components/form/file-upload";
 
 
 export default class Asker {
@@ -149,6 +150,24 @@ export default class Asker {
                     this.container.add(
                         new AnimateIn(
                             this.initFormControl(question, paragraphInput)
+                        ).render()
+                    )
+
+                    break;
+
+                case 'file':
+                    
+                    let fileInput = new FileUpload(question.fileTypes, question.required)
+
+                    this.container.add(
+                        new AnimateIn(
+                            fileInput.render()
+                        ).render()
+                    )
+
+                    this.container.add(
+                        new AnimateIn(
+                            this.initFormControl(question, fileInput)
                         ).render()
                     )
 
