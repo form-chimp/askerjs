@@ -17,6 +17,9 @@
     @apply w-full p-4 bg-gray-100 rounded font-medium text-gray-600 outline-none focus:border-blue-500 focus:shadow-lg focus:border-2 transition-all duration-75
 }
 
+.asker_buttons-container{
+    @apply  flex justify-between items-center;
+}
 
 .asker_next-btn{
     @apply font-medium p-4 text-gray-800;
@@ -31,6 +34,27 @@
     @apply w-full p-4 bg-gray-100 rounded font-medium text-gray-600 outline-none focus:border-2 focus:border-blue-500 focus:shadow-lg transition-all duration-75
 }
 
+.asker_dropZone{
+    @apply w-full h-52 border-2 border-dashed bg-gray-100 rounded-md flex justify-center items-center text-gray-600
+}
+.asker_dropZone.droped{
+    @apply bg-green-500 border-green-500 text-white
+}
+.asker_dropZone.droped.error{
+    @apply bg-red-500 border-red-500 text-white
+}
+
+.asker_dropZone input{
+    @apply w-full h-full absolute opacity-0
+}
+
+.asker_dropZone-title{
+    @apply text-2xl
+}
+
+.asker_dropZone-file{
+    @apply p-3 rounded bg-green-400 font-medium text-white mt-3
+}
 
 .asker_choices-container{
     @apply flex flex-col gap-2

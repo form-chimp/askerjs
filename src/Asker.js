@@ -8,6 +8,7 @@ import NextBtn from "./components/Next-btn";
 import BackBtn from "./components/Back-btn";
 import Textarea from "./components/form/Textarea";
 import ErrorHandler from "./components/Error-renderer";
+import FileUpload from "./components/form/file-upload";
 
 
 export default class Asker {
@@ -153,6 +154,24 @@ export default class Asker {
                     )
 
                     break;
+
+                case 'file':
+                    
+                    let fileInput = new FileUpload(question.fileTypes, question.required)
+
+                    this.container.add(
+                        new AnimateIn(
+                            fileInput.render()
+                        ).render()
+                    )
+
+                    this.container.add(
+                        new AnimateIn(
+                            this.initFormControl(question, fileInput)
+                        ).render()
+                    )
+
+                    break;
         
             default:
 
@@ -206,7 +225,7 @@ export default class Asker {
     initFormControl(question, input){
 
         let btnContainer = document.createElement('div');
-        btnContainer.classList.add('flex','justify-between','items-center');
+        btnContainer.classList.add('asker_buttons-container');
 
         let nextBtn = new NextBtn(()=>{
             question.value = input.getValue();
