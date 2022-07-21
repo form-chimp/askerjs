@@ -9,6 +9,7 @@ import BackBtn from "./components/Back-btn";
 import Textarea from "./components/form/Textarea";
 import ErrorHandler from "./components/Error-renderer";
 import FileUpload from "./components/form/file-upload";
+import InfoScreen from "./components/form/Info-screen";
 
 
 export default class Asker {
@@ -172,6 +173,23 @@ export default class Asker {
                     )
 
                     break;
+
+                case 'info':
+
+                    let infoScreen = new InfoScreen(question.content)
+                    this.container.add(
+                        new AnimateIn(
+                            infoScreen.render()
+                        ).render()
+                    )
+
+                    this.container.add(
+                        new AnimateIn(
+                            this.initFormControl(question, infoScreen)
+                        ).render()
+                    )
+    
+                    break;
         
             default:
 
@@ -228,6 +246,10 @@ export default class Asker {
         btnContainer.classList.add('asker_buttons-container');
 
         let nextBtn = new NextBtn(()=>{
+            if(question.type === 'info'){
+                this.nextQuestion(question)
+                return;
+            }
             question.value = input.getValue();
 
             if (question.value){
