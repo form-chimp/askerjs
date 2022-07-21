@@ -10,7 +10,7 @@ import Textarea from "./components/form/Textarea";
 import ErrorHandler from "./components/Error-renderer";
 import FileUpload from "./components/form/file-upload";
 import InfoScreen from "./components/form/Info-screen";
-
+import _ from "lodash";
 
 export default class Asker {
 
@@ -212,7 +212,9 @@ export default class Asker {
         } else {
             this.container.clear(); 
 
-            this.onComplete(this.questions);
+            this.onComplete(_.filter(this.questions, (q)=>{
+                return q.value != undefined
+            }));
 
 
             // this.newContent(
