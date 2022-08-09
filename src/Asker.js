@@ -19,8 +19,7 @@ export default class Asker {
      * @param {HTMLElement} target The target element to render the form to.
      * @param {Object} questions Questions object
      * @param {Function} onComplete Function to be called when the form is complete.  
-     * @param {Object} options
-     *  
+     * @param {Object} options Config options for Asker.
      */
     constructor(target,questions,onComplete, options){
 
@@ -74,7 +73,7 @@ export default class Asker {
 
             case 'singleChoice':
 
-                let singleChoiceInput = new ChoiceInput(true, question.required, question.choices);
+                let singleChoiceInput = new ChoiceInput(true, question.required, question.choices, question.other);
     
                 this.container.add(
                     new AnimateIn(
@@ -93,7 +92,7 @@ export default class Asker {
 
             case 'multipleChoice':
 
-                let multipleChoiceInput = new ChoiceInput(false, question.required, question.choices);
+                let multipleChoiceInput = new ChoiceInput(false, question.required, question.choices, question.other);
 
                 this.container.add(
                     new AnimateIn(
@@ -206,6 +205,10 @@ export default class Asker {
         let nextQuestion = currentQuestion.next;
 
         this.formTimeline.push( currentQuestion);
+
+        if (currentQuestion.callback){
+            currentQuestion.callback(currentQuestion)
+        }
 
         if (nextQuestion){
             this.ask(this.questions[nextQuestion]);
