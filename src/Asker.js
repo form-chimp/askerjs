@@ -19,8 +19,7 @@ export default class Asker {
      * @param {HTMLElement} target The target element to render the form to.
      * @param {Object} questions Questions object
      * @param {Function} onComplete Function to be called when the form is complete.  
-     * @param {Object} options
-     *  
+     * @param {Object} options Config options for Asker.
      */
     constructor(target,questions,onComplete, options){
 
