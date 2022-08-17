@@ -11,6 +11,7 @@ import ErrorHandler from "./components/Error-renderer";
 import FileUpload from "./components/form/file-upload";
 import InfoScreen from "./components/form/Info-screen";
 import _ from "lodash";
+import getAnswers from "./getAnswers";
 
 export default class Asker {
 
@@ -214,10 +215,10 @@ export default class Asker {
             this.ask(this.questions[nextQuestion]);
         } else {
             this.container.clear(); 
+            
 
-            this.onComplete(_.filter(this.questions, (q)=>{
-                return q.value != undefined
-            }));
+
+            this.onComplete(getAnswers(this.questions));
 
 
             // this.newContent(
