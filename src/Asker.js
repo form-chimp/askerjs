@@ -280,7 +280,7 @@ export default class Asker {
         }
         
         if(!question.next){
-            nextBtn.changeText("Finish")
+            nextBtn.changeText("Continue")
 
         }
 
