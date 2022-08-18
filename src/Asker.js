@@ -1,13 +1,12 @@
 
 import AnimateIn from "./components/animate-in";
 import Container from "./components/container";
-import Heading from "./components/heading";
+import Heading from "./components/Heading";
 import Input from "./components/form/input";
 import ChoiceInput from "./components/form/choiceInput";
 import NextBtn from "./components/Next-btn";
 import BackBtn from "./components/Back-btn";
 import Textarea from "./components/form/Textarea";
-import ErrorHandler from "./components/Error-renderer";
 import FileUpload from "./components/form/file-upload";
 import InfoScreen from "./components/form/Info-screen";
 import _ from "lodash";
