@@ -69,6 +69,15 @@ export default class Asker {
             ).render()
         );
 
+        if(question.description){
+            this.container.add(
+                new AnimateIn(
+                    `<p class="Asker_description">${question.description}</p>`
+                ).render()
+            )
+        }
+
+
         switch (question.type) {
 
             case 'singleChoice':
