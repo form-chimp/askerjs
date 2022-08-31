@@ -1,4 +1,4 @@
-import AnimateIn from "./animate-in";
+import AnimateIn from "./animate-in.js";
 
 
 

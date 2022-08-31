@@ -1,6 +1,5 @@
 import _ from "lodash"
-import AnimateIn from "../animate-in"
-import ErrorHandler from "../Error-renderer"
+import ErrorHandler from "../error-renderer.js"
 
 
 export default class FileUpload{

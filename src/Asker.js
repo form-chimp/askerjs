@@ -1,16 +1,15 @@
-
-import AnimateIn from "./components/animate-in";
-import Container from "./components/container";
-import Heading from "./components/Heading";
-import Input from "./components/form/input";
-import ChoiceInput from "./components/form/choiceInput";
-import NextBtn from "./components/Next-btn";
-import BackBtn from "./components/Back-btn";
-import Textarea from "./components/form/Textarea";
-import FileUpload from "./components/form/file-upload";
-import InfoScreen from "./components/form/Info-screen";
+import AnimateIn from "./components/animate-in.js";
+import Container from "./components/container.js";
+import Heading from "./components/heading.js";
+import Input from "./components/form/input.js";
+import ChoiceInput from "./components/form/choiceInput.js";
+import NextBtn from "./components/next-btn.js";
+import BackBtn from "./components/back-btn.js";
+import Textarea from "./components/form/Textarea.js";
+import FileUpload from "./components/form/file-upload.js";
+import InfoScreen from "./components/form/Info-screen.js";
 import _ from "lodash";
-import getAnswers from "./getAnswers";
+import getAnswers from "./getAnswers.js";
 
 export default class Asker {
 
