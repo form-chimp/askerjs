@@ -10,18 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/form-chimp/form-chimp-sdk.git"
+    "url": "git+https://github.com/form-chimp/askerjs.git"
   },
   "keywords": [
-    "api",
-    "form-chimp"
+    "forms",
+    "js"
   ],
   "author": "Anas Mohamed",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/form-chimp/form-chimp-sdk/issues"
+    "url": "https://github.com/form-chimp/askerjs/issues"
   },
-  "homepage": "https://github.com/form-chimp/form-chimp-sdk#readme",
+  "homepage": "https://github.com/form-chimp/askerjs#readme",
   "dependencies": {
     "axios": "^0.26.0",
     "cross-env": "^7.0.3",
