@@ -10,6 +10,7 @@ import FileUpload from "./components/form/file-upload.js";
 import InfoScreen from "./components/form/Info-screen.js";
 import _ from "lodash";
 import getAnswers from "./getAnswers.js";
+import MultiChoiceInput from "./components/form/multiChoiceInput.js";
 
 export default class Asker {
 
@@ -98,9 +99,9 @@ export default class Asker {
 
                 break;
 
-            case 'multipleChoice':
+            case 'multiChoice':
 
-                let multipleChoiceInput = new ChoiceInput(false, question.required, question.choices, question.other);
+                let multipleChoiceInput = new MultiChoiceInput(question.required, question.choices, question.other);
 
                 this.container.add(
                     new AnimateIn(
