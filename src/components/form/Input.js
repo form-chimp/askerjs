@@ -9,22 +9,17 @@ export default class Input{
 
     /**
      * 
-     * @param {String} type The type of input.
-     * @param {Boolean} required Whether the input is required.
-     * @param {Function} onComplete The function to call when the input is complete -- called when `Enter` is pressed.
-     * @param {Number} min The minimum length of the input.
-     * @param {Number} max The maximum length of the input.
-     * @param {*} placeholder 
+     * @param {object} question Question object
+     * @param {Function} onComplete Callback for when it's completed.
      */
-    constructor(type = 'text', required = false, onComplete, min=0, max=10000, placeholder = 'Enter Here'){
+    constructor(question, onComplete){
 
 
         this.element = document.createElement('input');
-        this.element.type = type;
-        this.element.placeholder = placeholder;
-        this.required = required;
-        this.minimum = min;
-        this.maximum = max
+        this.element.placeholder = question.placeholder || "Enter Here";
+        this.required = question.required || false;
+        this.minimum = question.min || 0;
+        this.maximum = question.max || 1000
 
         this.container = document.createElement('div');
         this.container.classList.add('w-full');

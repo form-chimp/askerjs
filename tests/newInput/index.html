@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../lib/build.js"></script>
+    <link rel="stylesheet" href="../../css/asker.css">
+</head>
+<body>
+    <div id="asker">
+
+    </div>
+</body>
+<script>
+    let container = document.getElementById('asker')
+
+    class testInput{
+        constructor(question, onComplete){
+            this.x = document.createElement('div')
+            this.x.innerHTML = "hello"
+        }
+
+        render(){
+            return(this.x)
+        }
+
+        getValue(){
+            return "hello"
+        }
+    }
+
+    let questions = {
+
+        test:{
+            type: 'hello',
+            types:['png','jpg','svg'],
+            text:`Multi-choice test question.`,
+            content: `hello world`,
+            required:true,
+            min:10,
+            choices: [
+                'one',
+                'two',
+                'three'
+            ]
+        }
+    }
+
+    let form = new Askerjs.default(container, questions, (answers)=>{
+        console.log(answers);
+    })
+
+    form.newInput({
+        type:'hello',
+        constructor:testInput,
+    })
+
+    form.ask(questions.test)
+
+</script>
+</html>

@@ -1,15 +1,11 @@
 import AnimateIn from "./components/animate-in.js";
 import Container from "./components/container.js";
 import Heading from "./components/heading.js";
-import Input from "./components/form/input.js";
-import ChoiceInput from "./components/form/choiceInput.js";
 import NextBtn from "./components/next-btn.js";
 import BackBtn from "./components/back-btn.js";
-import Textarea from "./components/form/Textarea.js";
-import FileUpload from "./components/form/file-upload.js";
-import InfoScreen from "./components/form/Info-screen.js";
 import _ from "lodash";
 import getAnswers from "./getAnswers.js";
+import questionTypes from "./question-types.js";
 
 export default class Asker {
 
@@ -20,8 +16,9 @@ export default class Asker {
      * @param {Function} onComplete Function to be called when the form is complete.  
      * @param {Object} options Config options for Asker.
      */
-    constructor(target,questions,onComplete, options){
+    constructor(target,questions,onComplete){
 
+        this.questionTypes = questionTypes
         this.questions = questions;
         this.onComplete = onComplete;
 
@@ -76,132 +73,25 @@ export default class Asker {
             )
         }
 
+        let questionInput = _.find(questionTypes,{type:question.type})
 
-        switch (question.type) {
+        let constructor = new questionInput.constructor(question, (value)=>{
+            if(value){
+                question.value = value;
+                this.nextQuestion(question);
+            }
+        })
+        this.container.add(
+            new AnimateIn(
+                constructor.render()
+            ).render()
+        )
 
-            case 'singleChoice':
-
-                let singleChoiceInput = new ChoiceInput(true, question.required, question.choices, question.other);
-    
-                this.container.add(
-                    new AnimateIn(
-                        singleChoiceInput.render()
-                    ).render()
-                )
-                
-                this.container.add(
-                    new AnimateIn(
-                        this.initFormControl(question, singleChoiceInput)
-                    ).render()
-                )
-
-
-                break;
-
-            case 'multipleChoice':
-
-                let multipleChoiceInput = new ChoiceInput(false, question.required, question.choices, question.other);
-
-                this.container.add(
-                    new AnimateIn(
-                        multipleChoiceInput.render()
-                    ).render()
-                )
-
-                this.container.add(
-                    new AnimateIn(
-                        this.initFormControl(question, multipleChoiceInput)
-                    ).render()
-                )
-                break;
-
-                
-            case 'text':
-
-                let textInput = new Input('text',question.required, (value) => {
-                    if(value){
-                        question.value = value;
-                        this.nextQuestion(question);
-                    }
-                }, question.min, question.max);
-                
-
-                this.container.add(
-                    new AnimateIn(
-                        textInput.render()
-                    ).render()
-                )
-
-                this.container.add(
-                    new AnimateIn(
-                        this.initFormControl(question, textInput)
-                    ).render()
-                )
-
-                break;
-
-                case 'paragraph':
-                    
-                    let paragraphInput = new Textarea(question.required, (value) => {
-                        if(value){
-                            question.value = value;
-                            this.nextQuestion(question);
-                        }
-                    }, question.min, question.max);
-
-                    this.container.add(
-                        new AnimateIn(
-                            paragraphInput.render()
-                        ).render()
-                    )
-
-                    this.container.add(
-                        new AnimateIn(
-                            this.initFormControl(question, paragraphInput)
-                        ).render()
-                    )
-
-                    break;
-
-                case 'file':
-                    
-                    let fileInput = new FileUpload(question.fileTypes, question.required)
-
-                    this.container.add(
-                        new AnimateIn(
-                            fileInput.render()
-                        ).render()
-                    )
-
-                    this.container.add(
-                        new AnimateIn(
-                            this.initFormControl(question, fileInput)
-                        ).render()
-                    )
-
-                    break;
-
-                case 'info':
-
-                    let infoScreen = new InfoScreen(question.content)
-                    this.container.add(
-                        new AnimateIn(
-                            infoScreen.render()
-                        ).render()
-                    )
-
-                    this.container.add(
-                        new AnimateIn(
-                            this.initFormControl(question, infoScreen)
-                        ).render()
-                    )
-    
-                    break;
-        
-            default:
-
-                break;
-        }
+        this.container.add(
+            new AnimateIn(
+                this.initFormControl(question,constructor)
+            ).render()
+        )
     }
 
     /**
@@ -227,12 +117,6 @@ export default class Asker {
 
             this.onComplete(getAnswers(this.questions));
 
-
-            // this.newContent(
-            //     new AnimateIn(
-            //         new Heading('Thank you!').render()
-            //     ).render()
-            // );
         }
 
         //console.log(currentQuestion);
@@ -301,5 +185,26 @@ export default class Asker {
                 content
             ).render()
         );
+    }
+
+    /**
+     * This function allows you to extend/add to the question types Asker supports. i.e A slider question.
+     * @param {{
+     * type:string, 
+     * constructor: Object
+     * }} input Two props must be present. 
+        * - `type` prop is for the type of input this is. 
+        * - `constructor` prop is for the input constructor.
+     */
+    newInput(input){
+        if(input.type){
+            
+            if(!_.includes(questionTypes, input.type)){
+                this.questionTypes.push(input)
+                return;
+            }
+
+        }
+        console.error(`The "type" prop is missing from the input.`);
     }
 }

@@ -104,18 +104,16 @@ class Choice{
  */
 export default class ChoiceInput{
 
-    /**
-     * 
-     * @param {Boolean} singleChoice Whether the input should only allow one choice.
-     * @param {Boolean} required Whether the input should be required.
-     * @param {Array} choices The choices to choose from.
-     */
-    constructor(singleChoice = true, required = false, choices = [], other=false){
+   /**
+    * 
+    * @param {object} question Question object
+    */
+    constructor(question){
 
-        this.choices = choices;
-        this.singleChoice = singleChoice;
-        this.required = required;
-        this.otherChoice = other
+        this.choices = question.choices || [];
+        this.singleChoice = true;
+        this.required = question.required || false;
+        this.otherChoice = question.other || false;
 
         this.container = document.createElement('div');
 
@@ -152,9 +150,9 @@ export default class ChoiceInput{
             });
         });
 
-        this.otherChoiceElement = new Choice("Other",this.singleChoice, other)
+        this.otherChoiceElement = new Choice("Other",this.singleChoice, this.otherChoice)
 
-        if(other===true){
+        if(this.otherChoice === true){
             //console.log("this should work");
 
             this.otherChoiceElement.labelElement.addEventListener('click', () => {
