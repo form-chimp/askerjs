@@ -21,7 +21,7 @@ export default class Asker {
      * @param {Function} onComplete Function to be called when the form is complete.  
      * @param {Object} options Config options for Asker.
      */
-    constructor(target,questions,onComplete, options){
+    constructor(target,questions,onComplete){
 
         this.questions = questions;
         this.onComplete = onComplete;
