@@ -11,6 +11,7 @@ import InfoScreen from "./components/form/Info-screen.js";
 import _ from "lodash";
 import getAnswers from "./getAnswers.js";
 import MultiChoiceInput from "./components/form/multiChoiceInput.js";
+import questionTypes from "./question-types.js";
 
 export default class Asker {
 
@@ -23,6 +24,7 @@ export default class Asker {
      */
     constructor(target,questions,onComplete){
 
+        this.questionTypes = questionTypes
         this.questions = questions;
         this.onComplete = onComplete;
 
