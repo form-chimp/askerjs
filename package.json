@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "cross-env MODE=development webpack -w",
-    "css": "tailwindcss -i css/tailwind.css -o css/asker.css -w",
     "build": "cross-env MODE=production webpack"
   },
   "repository": {
