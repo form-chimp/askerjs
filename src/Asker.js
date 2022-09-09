@@ -79,132 +79,25 @@ export default class Asker {
             )
         }
 
+        let questionInput = _.find(questionTypes,{type:question.type})
 
-        switch (question.type) {
+        let constructor = new questionInput.constructor(question, (value)=>{
+            if(value){
+                question.value = value;
+                this.nextQuestion(question);
+            }
+        })
+        this.container.add(
+            new AnimateIn(
+                constructor.render()
+            ).render()
+        )
 
-            case 'singleChoice':
-
-                let singleChoiceInput = new ChoiceInput(true, question.required, question.choices, question.other);
-    
-                this.container.add(
-                    new AnimateIn(
-                        singleChoiceInput.render()
-                    ).render()
-                )
-                
-                this.container.add(
-                    new AnimateIn(
-                        this.initFormControl(question, singleChoiceInput)
-                    ).render()
-                )
-
-
-                break;
-
-            case 'multiChoice':
-
-                let multipleChoiceInput = new MultiChoiceInput(question.required, question.choices, question.other);
-
-                this.container.add(
-                    new AnimateIn(
-                        multipleChoiceInput.render()
-                    ).render()
-                )
-
-                this.container.add(
-                    new AnimateIn(
-                        this.initFormControl(question, multipleChoiceInput)
-                    ).render()
-                )
-                break;
-
-                
-            case 'text':
-
-                let textInput = new Input('text',question.required, (value) => {
-                    if(value){
-                        question.value = value;
-                        this.nextQuestion(question);
-                    }
-                }, question.min, question.max);
-                
-
-                this.container.add(
-                    new AnimateIn(
-                        textInput.render()
-                    ).render()
-                )
-
-                this.container.add(
-                    new AnimateIn(
-                        this.initFormControl(question, textInput)
-                    ).render()
-                )
-
-                break;
-
-                case 'paragraph':
-                    
-                    let paragraphInput = new Textarea(question.required, (value) => {
-                        if(value){
-                            question.value = value;
-                            this.nextQuestion(question);
-                        }
-                    }, question.min, question.max);
-
-                    this.container.add(
-                        new AnimateIn(
-                            paragraphInput.render()
-                        ).render()
-                    )
-
-                    this.container.add(
-                        new AnimateIn(
-                            this.initFormControl(question, paragraphInput)
-                        ).render()
-                    )
-
-                    break;
-
-                case 'file':
-                    
-                    let fileInput = new FileUpload(question.fileTypes, question.required)
-
-                    this.container.add(
-                        new AnimateIn(
-                            fileInput.render()
-                        ).render()
-                    )
-
-                    this.container.add(
-                        new AnimateIn(
-                            this.initFormControl(question, fileInput)
-                        ).render()
-                    )
-
-                    break;
-
-                case 'info':
-
-                    let infoScreen = new InfoScreen(question.content)
-                    this.container.add(
-                        new AnimateIn(
-                            infoScreen.render()
-                        ).render()
-                    )
-
-                    this.container.add(
-                        new AnimateIn(
-                            this.initFormControl(question, infoScreen)
-                        ).render()
-                    )
-    
-                    break;
-        
-            default:
-
-                break;
-        }
+        this.container.add(
+            new AnimateIn(
+                this.initFormControl(question,constructor)
+            ).render()
+        )
     }
 
     /**
