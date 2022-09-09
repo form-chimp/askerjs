@@ -192,4 +192,25 @@ export default class Asker {
             ).render()
         );
     }
+
+    /**
+     * This function allows you to extend/add to the question types Asker supports. i.e A slider question.
+     * @param {{
+     * type:string, 
+     * constructor: Object
+     * }} input Two props must be present. 
+        * - `type` prop is for the type of input this is. 
+        * - `constructor` prop is for the input constructor.
+     */
+    newInput(input){
+        if(input.type){
+            
+            if(!_.includes(questionTypes, input.type)){
+                this.questionTypes.push(input)
+                return;
+            }
+
+        }
+        console.error(`The "type" prop is missing from the input.`);
+    }
 }
