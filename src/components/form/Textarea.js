@@ -10,18 +10,16 @@ export default class Textarea {
 
     /**
      * 
-     * @param {Boolean} required Whether the field is required or not.
-     * @param {Function} onComplete Function to call when complete.
-     * @param {Number} min Minimum length of the field.
-     * @param {String} placeholder Placeholder text.
+     * @param {object} question Question object
+     * @param {Function} onComplete Callback for when it's complete.
      */
-    constructor(required = false, onComplete, min = 0, max = 1000000, placeholder = 'Enter Here') {
+    constructor(question,onComplete) {
 
         this.element = document.createElement('textarea');
-        this.element.placeholder = placeholder;
-        this.required = required;
-        this.minimum = min;
-        this.maximum = max
+        this.element.placeholder = question.placeholder || "Enter Here";
+        this.required = question.required || false;
+        this.minimum = question.min || 0;
+        this.maximum = question.max || 1000000
         this.container = document.createElement('div');
         this.container.classList.add('w-full');
 

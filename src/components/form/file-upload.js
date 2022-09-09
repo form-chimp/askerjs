@@ -6,13 +6,13 @@ export default class FileUpload{
 
     /**
      * 
-     * @param {Array | undefined} types The file types to accept.
-     * @param {Boolean} required Whether the question with this input is required.
+     * @param {object} question Question object 
+     * @param {Function} onComplete Callback for when it's complete.
      */
-    constructor(types = undefined, required = false){
+    constructor(question,onComplete){
         
-        this.types = types
-        this.required = required
+        this.types = question.types || undefined
+        this.required = question.required || false
         
         this.container = document.createElement('div')
 
