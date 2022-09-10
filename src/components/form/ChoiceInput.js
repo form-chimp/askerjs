@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Input from './input.js';
+import Input from './Input.js';
 
 
 class Choice{
