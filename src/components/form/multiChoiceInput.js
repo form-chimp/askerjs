@@ -1,4 +1,4 @@
-import ChoiceInput from "./choiceInput.js";
+import ChoiceInput from "./ChoiceInput.js";
 
 export default class MultiChoiceInput extends ChoiceInput{
 

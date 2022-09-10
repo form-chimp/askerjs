@@ -1,5 +1,5 @@
 import _ from "lodash"
-import ErrorHandler from "../error-renderer.js"
+import ErrorHandler from "../Error-renderer.js"
 
 
 export default class FileUpload{
