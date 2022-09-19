@@ -70,8 +70,7 @@ export default class FileUpload{
             if(this.element.files[0] != undefined){
 
                 if(this.types){
-
-                    let fileType = _.split(this.element.files[0].name,'.')[1]
+                    let fileType = _.lowerCase(_.split(this.element.files[0].name,'.')[1])
     
     
                     if(_.includes(this.types,fileType)){
