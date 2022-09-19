@@ -1,6 +1,6 @@
 {
   "name": "askerjs",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "An elegant web form built with pure JS.",
   "main": "src/index.js",
   "scripts": {
